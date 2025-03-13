@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Download File</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <h2>Siap Download!</h2>
+  <p>Mohon tunggu 5 detik...</p>
+  <a id="downloadLink" href="#">Download File</a>
+
+  <script>
+    const pathArray = window.location.pathname.split('/');
+    const fileID = pathArray[2]; // Ambil ID dari URL
+
+    // Ambil URL dari JSONBIN
+    fetch('https://api.jsonbin.io/v3/b/64xxxxx/latest', {
+      headers: { 'X-Master-Key': 'kunci_api_jsonbin' }
+    })
+    .then(response => response.json())
+    .then(data => {
+      const fileURL = data.record.url;
+
+      // Timer 5 detik
+      setTimeout(() => {
+        document.getElementById('downloadLink').href = fileURL;
+        document.getElementById('downloadLink').click();
+      }, 5000);
+    });
+  </script>
+</body>
+</html>
