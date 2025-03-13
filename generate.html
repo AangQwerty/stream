@@ -6,7 +6,7 @@
 </head>
 <body>
   <h2>Generate Link Download</h2>
-  <input type="text" id="linkInput" placeholder="Masukkan url file">
+  <input type="text" id="linkInput" placeholder="Masukkan Link MediaFire">
   <button onclick="generateLink()">Generate</button>
   <br>
   <p id="outputLink"></p>
@@ -14,22 +14,24 @@
   <script>
     async function generateLink() {
       const inputLink = document.getElementById('linkInput').value;
+      const encodedLink = encodeURIComponent(inputLink);
+      const randomID = Math.random().toString(36).substr(2, 8);
+      const outputLink = `https://aangqwerty.github.io/stream/d/${randomID}`;
 
-      // Generate ID random kayak LuluVDO
-      const randomID = Math.random().toString(36).substr(2, 10);
-      const linkData = { id: randomID, url: inputLink };
+      // Ambil data links.json
+      const response = await fetch('links.json');
+      const links = await response.json();
 
-      // Simpan ke `links.json` (GitHub Pages ga support JSON, kita pake alternatif lain)
-      await fetch('https://api.jsonbin.io/v3/b/64xxxxx', {
+      // Tambahkan link baru ke links.json
+      links[randomID] = inputLink;
+
+      // Push perubahan ke links.json
+      await fetch('links.json', {
         method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Master-Key': 'kunci_api_jsonbin'
-        },
-        body: JSON.stringify(linkData)
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(links)
       });
 
-      const outputLink = `https://aangqwerty.github.io/stream/d/${randomID}`;
       document.getElementById('outputLink').innerHTML = `<a href="${outputLink}" target="_blank">${outputLink}</a>`;
     }
   </script>
