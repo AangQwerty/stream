@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting...</title>
+  <script>
+    const links = {
+      "etzrdbf0km": "https://www.mediafire.com/file/abcd123/file.zip",
+      "tqwtmhyfd5ze": "https://luluvdo.com/d/tqwtmhyfd5ze"
+    };
+
+    const path = window.location.pathname.split('/d/')[1];
+    if (path && links[path]) {
+      window.location.href = links[path];
+    } else {
+      document.body.innerHTML = `<h1>404 Not Found</h1><p>Link tidak ditemukan.</p>`;
+    }
+  </script>
+</head>
+<body>
+</body>
+</html>
