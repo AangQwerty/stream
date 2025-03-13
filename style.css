@@ -10,7 +10,7 @@ body {
   color: white;
   text-align: center;
   padding: 20px;
-  user-zoom: none; /* Disable Zoom */
+  touch-action: none; /* Disable zoom */
 }
 
 .logo {
