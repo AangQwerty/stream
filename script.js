@@ -1,24 +1,29 @@
 const downloadBtn = document.getElementById('downloadBtn');
 const countdownText = document.getElementById('countdown');
 
-// Link download yang bener
-const downloadLink = 'https://www.mediafire.com/file/mmn6h6mrbzx93ul/Stark_x_Fern.mp4/file';
+// Ambil URL dari parameter query
+const urlParams = new URLSearchParams(window.location.search);
+const fileURL = urlParams.get('file');
 
-let timer = 5; // Waktu tunggu 5 detik
+if (!fileURL) {
+  countdownText.innerText = 'Error: Link tidak ditemukan!';
+  downloadBtn.style.display = 'none'; // Sembunyikan tombol download
+} else {
+  let timer = 5;
 
-const countdownInterval = setInterval(() => {
-  countdownText.innerText = `Tunggu ${timer} detik...`;
-  timer--;
+  const countdownInterval = setInterval(() => {
+    countdownText.innerText = `Tunggu ${timer} detik...`;
+    timer--;
 
-  if (timer < 0) {
-    clearInterval(countdownInterval);
-    countdownText.innerText = 'Siap untuk download!';
-    downloadBtn.classList.add('active');
-    downloadBtn.disabled = false; // Aktifkan tombol download
-  }
-}, 1000);
+    if (timer < 0) {
+      clearInterval(countdownInterval);
+      countdownText.innerText = 'Siap untuk download!';
+      downloadBtn.classList.add('active');
+      downloadBtn.disabled = false; // Aktifkan tombol
+    }
+  }, 1000);
 
-// Aksi saat tombol ditekan
-downloadBtn.addEventListener('click', () => {
-  window.location.href = downloadLink; // Langsung redirect ke MediaFire
-});
+  downloadBtn.addEventListener('click', () => {
+    window.location.href = fileURL; // Redirect ke link dari parameter
+  });
+}
