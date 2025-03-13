@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Generate Link</title>
+</head>
+<body>
+  <h2>Generate Link Download</h2>
+  <input type="text" id="linkInput" placeholder="Masukkan Link MediaFire">
+  <button onclick="generateLink()">Generate</button>
+  <br>
+  <p id="outputLink"></p>
+
+  <script>
+    function generateLink() {
+      const inputLink = document.getElementById('linkInput').value;
+      const encodedLink = encodeURIComponent(inputLink);
+      const outputLink = `https://aangqwerty.github.io/stream/?file=${encodedLink}`;
+      document.getElementById('outputLink').innerHTML = `<a href="${outputLink}" target="_blank">${outputLink}</a>`;
+    }
+  </script>
+</body>
+</html>
