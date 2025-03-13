@@ -1,12 +1,11 @@
 const downloadBtn = document.getElementById('downloadBtn');
 const countdownText = document.getElementById('countdown');
 
-// Ganti link download di sini
+// Link MediaFire yang bener
 const downloadLink = 'https://www.mediafire.com/file/mmn6h6mrbzx93ul/Stark_x_Fern.mp4/file';
 
 let timer = 5; // Waktu tunggu 5 detik
 
-// Hitung mundur
 const countdownInterval = setInterval(() => {
   countdownText.innerText = `Tunggu ${timer} detik...`;
   timer--;
@@ -19,7 +18,6 @@ const countdownInterval = setInterval(() => {
   }
 }, 1000);
 
-// Event saat tombol ditekan
 downloadBtn.addEventListener('click', () => {
-  window.location.href = downloadLink;
+  window.location.href = downloadLink; // Redirect ke MediaFire
 });
